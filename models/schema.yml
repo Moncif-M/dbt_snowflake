@@ -22,6 +22,7 @@ models :
           - unique
           - not_null
       - name: status
+        description: "{{doc('order_status')}}"
         tests:
           - accepted_values:
               values: ['placed','shipped','completed','return_pending','returned']
@@ -31,5 +32,10 @@ models :
           - relationships:
               field: customer_id
               to: ref('stg_customers')
-          
+  - name : stg_stripe__payments
+    columns:
+      - name: orderid
+        tests:
+          - is_positive:
+              field: amount
 
